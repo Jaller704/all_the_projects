@@ -1,0 +1,5 @@
+CSC8103, Distributed Algorithms, 10
+CSC8201, The Challenge of Dependable Systems, 10
+CSC8205, Research Skills, 05
+CSC8206, Group Project in Computer Security and Resilience, 15
+CSC8498, Project and Dissertation for MComp, 30
