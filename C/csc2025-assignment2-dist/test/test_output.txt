@@ -1,0 +1,281 @@
+--------------------------------------------------------------
+TESTING DO_STARTFSLOG
+test invalid ops2log == -1 ...
+... success
+test invalid ops2log == 128 ...
+... success
+test valid ops2log == 0 ...
+... success
+test valid ops2log == 1 ...
+... success
+test valid ops2log == 127 ...
+... success
+--------------------------------------------------------------
+TESTING DO_STOPFSLOG
+test invalid ops2stoplog == -1 ...
+... success
+test invalid ops2stoplog == 128 ...
+... success
+test valid ops2stoplog == 127 ...
+... success
+test valid ops2stoplog == 1 ...
+... success
+test valid ops2stoplog == 0 ...
+... success
+--------------------------------------------------------------
+TESTING DO_GETFSLOGINF
+test invalid fsloginf == NULL ...
+... success
+test valid fsloginf (before and after logging all) ...
+-------------------------------------------------------------
+Filesystem log meta-information
+-------------------------------------------------------------
+index of first entry (start):      0
+entries in log (len):            200
+operations to log (ops2log):    0177
+-------------------------------------------------------------
+-------------------------------------------------------------
+Filesystem log meta-information
+-------------------------------------------------------------
+index of first entry (start):      0
+entries in log (len):            200
+operations to log (ops2log):    0000
+-------------------------------------------------------------
+... success
+--------------------------------------------------------------
+TESTING DO_GETFSLOG
+test invalid (fsloginf, fslog) == (NULL, fslog) ...
+... success
+test invalid (fsloginf, fslog) == (fsloginf, NULL) ...
+... success
+test invalid (fsloginf, fslog) == (NULL, NULL) ...
+... success
+test valid (fsloginf, fslog) ...
+Filesystem ops to log are selected by bitwise combinations of 
+one or more of the following opcodes:
+  FSOP_NONE      : none                         : 0000 oct or   0 dec
+  FSOP_OPEN      : open                         : 0001 oct or   1 dec
+  FSOP_CLOSE     : close                        : 0002 oct or   2 dec
+  FSOP_READ      : read                         : 0004 oct or   4 dec
+  FSOP_WRITE     : write                        : 0010 oct or   8 dec
+  FSOP_CREAT     : create                       : 0020 oct or  16 dec
+  FSOP_UNLNK     : unlink/delete                : 0040 oct or  32 dec
+  FSOP_ALL_WOERR : all without errors           : 0077 oct or  63 dec
+  FSOP_ERR       : errors when ORed with others : 0100 oct or  64 dec
+  FSOP_ALL       : all                          : 0177 oct or 127 dec
+(see unistd.h for definition of FSOP_* constants)
+Enter a valid combination of opcode(s) to log (anything else to abort): 127
+--------------------------------------------------------------
+-------------------------------------------------------------
+Filesystem log meta-information
+-------------------------------------------------------------
+index of first entry (start):      2
+entries in log (len):            200
+operations to log (ops2log):    0000
+-------------------------------------------------------------
+-------------------------------------------------------------
+Filesystem log entries
+-------------------------------------------------------------
+[  2] opcode: 0020 | result:    0 | fd_nr:  5 | mode: 0100644 | uid: 0 | gid: 0 | sz: 0 | 02_fslog_test | Tue Nov 20 17:02:27 2018
+[  3] opcode: 0004 | result:    2 | fd_nr:  9 | mode: 020666 | uid: 0 | gid: 4 | sz: 0 |  | Tue Nov 20 17:02:27 2018
+[  4] opcode: 0020 | result:    0 | fd_nr:  6 | mode: 0100644 | uid: 0 | gid: 0 | sz: 0 | 03_fslog_test | Tue Nov 20 17:02:27 2018
+[  5] opcode: 0020 | result:    0 | fd_nr:  7 | mode: 0100644 | uid: 0 | gid: 0 | sz: 0 | 04_fslog_test | Tue Nov 20 17:02:27 2018
+[  6] opcode: 0020 | result:    0 | fd_nr:  8 | mode: 0100644 | uid: 0 | gid: 0 | sz: 0 | 05_fslog_test | Tue Nov 20 17:02:27 2018
+[  7] opcode: 0020 | result:    0 | fd_nr:  9 | mode: 0100644 | uid: 0 | gid: 0 | sz: 0 | 06_fslog_test | Tue Nov 20 17:02:27 2018
+[  8] opcode: 0020 | result:    0 | fd_nr: 10 | mode: 0100644 | uid: 0 | gid: 0 | sz: 0 | 07_fslog_test | Tue Nov 20 17:02:27 2018
+[  9] opcode: 0020 | result:    0 | fd_nr: 11 | mode: 0100644 | uid: 0 | gid: 0 | sz: 0 | 08_fslog_test | Tue Nov 20 17:02:27 2018
+[ 10] opcode: 0010 | result:   40 | fd_nr:  3 | mode: 027777 | uid: -1 | gid: -1 | sz: 384 |  | Tue Nov 20 17:02:27 2018
+[ 11] opcode: 0020 | result:    0 | fd_nr: 12 | mode: 0100644 | uid: 0 | gid: 0 | sz: 0 | 09_fslog_test | Tue Nov 20 17:02:27 2018
+[ 12] opcode: 0020 | result:    0 | fd_nr: 13 | mode: 0100644 | uid: 0 | gid: 0 | sz: 0 | 10_fslog_test | Tue Nov 20 17:02:27 2018
+[ 13] opcode: 0020 | result:    0 | fd_nr: 14 | mode: 0100644 | uid: 0 | gid: 0 | sz: 0 | 11_fslog_test | Tue Nov 20 17:02:27 2018
+[ 14] opcode: 0020 | result:    0 | fd_nr: 15 | mode: 0100644 | uid: 0 | gid: 0 | sz: 0 | 12_fslog_test | Tue Nov 20 17:02:27 2018
+[ 15] opcode: 0020 | result:    0 | fd_nr: 16 | mode: 0100644 | uid: 0 | gid: 0 | sz: 0 | 13_fslog_test | Tue Nov 20 17:02:27 2018
+[ 16] opcode: 0020 | result:    0 | fd_nr: 17 | mode: 0100644 | uid: 0 | gid: 0 | sz: 0 | 14_fslog_test | Tue Nov 20 17:02:27 2018
+[ 17] opcode: 0020 | result:    0 | fd_nr: 18 | mode: 0100644 | uid: 0 | gid: 0 | sz: 0 | 15_fslog_test | Tue Nov 20 17:02:27 2018
+[ 18] opcode: 0020 | result:    0 | fd_nr: 19 | mode: 0100644 | uid: 0 | gid: 0 | sz: 0 | 16_fslog_test | Tue Nov 20 17:02:27 2018
+[ 19] opcode: 0020 | result:    0 | fd_nr: 20 | mode: 0100644 | uid: 0 | gid: 0 | sz: 0 | 17_fslog_test | Tue Nov 20 17:02:27 2018
+[ 20] opcode: 0020 | result:    0 | fd_nr: 21 | mode: 0100644 | uid: 0 | gid: 0 | sz: 0 | 18_fslog_test | Tue Nov 20 17:02:27 2018
+[ 21] opcode: 0020 | result:    0 | fd_nr: 22 | mode: 0100644 | uid: 0 | gid: 0 | sz: 0 | 19_fslog_test | Tue Nov 20 17:02:27 2018
+[ 22] opcode: 0020 | result:    0 | fd_nr: 23 | mode: 0100644 | uid: 0 | gid: 0 | sz: 0 | 20_fslog_test | Tue Nov 20 17:02:27 2018
+[ 23] opcode: 0020 | result:    0 | fd_nr: 24 | mode: 0100644 | uid: 0 | gid: 0 | sz: 0 | 21_fslog_test | Tue Nov 20 17:02:27 2018
+[ 24] opcode: 0020 | result:    0 | fd_nr: 25 | mode: 0100644 | uid: 0 | gid: 0 | sz: 0 | 22_fslog_test | Tue Nov 20 17:02:27 2018
+[ 25] opcode: 0020 | result:    0 | fd_nr: 26 | mode: 0100644 | uid: 0 | gid: 0 | sz: 0 | 23_fslog_test | Tue Nov 20 17:02:27 2018
+[ 26] opcode: 0020 | result:    0 | fd_nr: 27 | mode: 0100644 | uid: 0 | gid: 0 | sz: 0 | 24_fslog_test | Tue Nov 20 17:02:27 2018
+[ 27] opcode: 0020 | result:    0 | fd_nr: 28 | mode: 0100644 | uid: 0 | gid: 0 | sz: 0 | 25_fslog_test | Tue Nov 20 17:02:27 2018
+[ 28] opcode: 0020 | result:    0 | fd_nr: 29 | mode: 0100644 | uid: 0 | gid: 0 | sz: 0 | 26_fslog_test | Tue Nov 20 17:02:27 2018
+[ 29] opcode: 0020 | result:    0 | fd_nr: 30 | mode: 0100644 | uid: 0 | gid: 0 | sz: 0 | 27_fslog_test | Tue Nov 20 17:02:27 2018
+[ 30] opcode: 0020 | result:    0 | fd_nr: 31 | mode: 0100644 | uid: 0 | gid: 0 | sz: 0 | 28_fslog_test | Tue Nov 20 17:02:27 2018
+[ 31] opcode: 0020 | result:    0 | fd_nr: 32 | mode: 0100644 | uid: 0 | gid: 0 | sz: 0 | 29_fslog_test | Tue Nov 20 17:02:27 2018
+[ 32] opcode: 0020 | result:    0 | fd_nr: 33 | mode: 0100644 | uid: 0 | gid: 0 | sz: 0 | 30_fslog_test | Tue Nov 20 17:02:27 2018
+[ 33] opcode: 0020 | result:    0 | fd_nr: 34 | mode: 0100644 | uid: 0 | gid: 0 | sz: 0 | 31_fslog_test | Tue Nov 20 17:02:27 2018
+[ 34] opcode: 0020 | result:    0 | fd_nr: 35 | mode: 0100644 | uid: 0 | gid: 0 | sz: 0 | 32_fslog_test | Tue Nov 20 17:02:27 2018
+[ 35] opcode: 0020 | result:    0 | fd_nr: 36 | mode: 0100644 | uid: 0 | gid: 0 | sz: 0 | 33_fslog_test | Tue Nov 20 17:02:27 2018
+[ 36] opcode: 0020 | result:    0 | fd_nr: 37 | mode: 0100644 | uid: 0 | gid: 0 | sz: 0 | 34_fslog_test | Tue Nov 20 17:02:27 2018
+[ 37] opcode: 0020 | result:    0 | fd_nr: 38 | mode: 0100644 | uid: 0 | gid: 0 | sz: 0 | 35_fslog_test | Tue Nov 20 17:02:27 2018
+[ 38] opcode: 0020 | result:    0 | fd_nr: 39 | mode: 0100644 | uid: 0 | gid: 0 | sz: 0 | 36_fslog_test | Tue Nov 20 17:02:27 2018
+[ 39] opcode: 0020 | result:    0 | fd_nr: 40 | mode: 0100644 | uid: 0 | gid: 0 | sz: 0 | 37_fslog_test | Tue Nov 20 17:02:27 2018
+[ 40] opcode: 0020 | result:    0 | fd_nr: 41 | mode: 0100644 | uid: 0 | gid: 0 | sz: 0 | 38_fslog_test | Tue Nov 20 17:02:27 2018
+[ 41] opcode: 0020 | result:    0 | fd_nr: 42 | mode: 0100644 | uid: 0 | gid: 0 | sz: 0 | 39_fslog_test | Tue Nov 20 17:02:27 2018
+[ 42] opcode: 0010 | result:   15 | fd_nr:  3 | mode: 0100644 | uid: 0 | gid: 0 | sz: 15 |  | Tue Nov 20 17:02:27 2018
+[ 43] opcode: 0010 | result:   15 | fd_nr:  4 | mode: 0100644 | uid: 0 | gid: 0 | sz: 15 |  | Tue Nov 20 17:02:27 2018
+[ 44] opcode: 0010 | result:   15 | fd_nr:  5 | mode: 0100644 | uid: 0 | gid: 0 | sz: 15 |  | Tue Nov 20 17:02:27 2018
+[ 45] opcode: 0010 | result:   15 | fd_nr:  6 | mode: 0100644 | uid: 0 | gid: 0 | sz: 15 |  | Tue Nov 20 17:02:27 2018
+[ 46] opcode: 0010 | result:   15 | fd_nr:  7 | mode: 0100644 | uid: 0 | gid: 0 | sz: 15 |  | Tue Nov 20 17:02:27 2018
+[ 47] opcode: 0010 | result:   15 | fd_nr:  8 | mode: 0100644 | uid: 0 | gid: 0 | sz: 15 |  | Tue Nov 20 17:02:27 2018
+[ 48] opcode: 0010 | result:   15 | fd_nr:  9 | mode: 0100644 | uid: 0 | gid: 0 | sz: 15 |  | Tue Nov 20 17:02:27 2018
+[ 49] opcode: 0010 | result:   15 | fd_nr: 10 | mode: 0100644 | uid: 0 | gid: 0 | sz: 15 |  | Tue Nov 20 17:02:27 2018
+[ 50] opcode: 0010 | result:   15 | fd_nr: 11 | mode: 0100644 | uid: 0 | gid: 0 | sz: 15 |  | Tue Nov 20 17:02:27 2018
+[ 51] opcode: 0010 | result:   15 | fd_nr: 12 | mode: 0100644 | uid: 0 | gid: 0 | sz: 15 |  | Tue Nov 20 17:02:27 2018
+[ 52] opcode: 0010 | result:   15 | fd_nr: 13 | mode: 0100644 | uid: 0 | gid: 0 | sz: 15 |  | Tue Nov 20 17:02:27 2018
+[ 53] opcode: 0010 | result:   15 | fd_nr: 14 | mode: 0100644 | uid: 0 | gid: 0 | sz: 15 |  | Tue Nov 20 17:02:27 2018
+[ 54] opcode: 0010 | result:   15 | fd_nr: 15 | mode: 0100644 | uid: 0 | gid: 0 | sz: 15 |  | Tue Nov 20 17:02:27 2018
+[ 55] opcode: 0010 | result:   15 | fd_nr: 16 | mode: 0100644 | uid: 0 | gid: 0 | sz: 15 |  | Tue Nov 20 17:02:27 2018
+[ 56] opcode: 0010 | result:   15 | fd_nr: 17 | mode: 0100644 | uid: 0 | gid: 0 | sz: 15 |  | Tue Nov 20 17:02:27 2018
+[ 57] opcode: 0010 | result:   15 | fd_nr: 18 | mode: 0100644 | uid: 0 | gid: 0 | sz: 15 |  | Tue Nov 20 17:02:27 2018
+[ 58] opcode: 0010 | result:   15 | fd_nr: 19 | mode: 0100644 | uid: 0 | gid: 0 | sz: 15 |  | Tue Nov 20 17:02:27 2018
+[ 59] opcode: 0010 | result:   15 | fd_nr: 20 | mode: 0100644 | uid: 0 | gid: 0 | sz: 15 |  | Tue Nov 20 17:02:27 2018
+[ 60] opcode: 0010 | result:   15 | fd_nr: 21 | mode: 0100644 | uid: 0 | gid: 0 | sz: 15 |  | Tue Nov 20 17:02:27 2018
+[ 61] opcode: 0010 | result:   15 | fd_nr: 22 | mode: 0100644 | uid: 0 | gid: 0 | sz: 15 |  | Tue Nov 20 17:02:27 2018
+[ 62] opcode: 0010 | result:   15 | fd_nr: 23 | mode: 0100644 | uid: 0 | gid: 0 | sz: 15 |  | Tue Nov 20 17:02:27 2018
+[ 63] opcode: 0010 | result:   15 | fd_nr: 24 | mode: 0100644 | uid: 0 | gid: 0 | sz: 15 |  | Tue Nov 20 17:02:27 2018
+[ 64] opcode: 0010 | result:   15 | fd_nr: 25 | mode: 0100644 | uid: 0 | gid: 0 | sz: 15 |  | Tue Nov 20 17:02:27 2018
+[ 65] opcode: 0010 | result:   15 | fd_nr: 26 | mode: 0100644 | uid: 0 | gid: 0 | sz: 15 |  | Tue Nov 20 17:02:27 2018
+[ 66] opcode: 0010 | result:   15 | fd_nr: 27 | mode: 0100644 | uid: 0 | gid: 0 | sz: 15 |  | Tue Nov 20 17:02:27 2018
+[ 67] opcode: 0010 | result:   15 | fd_nr: 28 | mode: 0100644 | uid: 0 | gid: 0 | sz: 15 |  | Tue Nov 20 17:02:27 2018
+[ 68] opcode: 0010 | result:   15 | fd_nr: 29 | mode: 0100644 | uid: 0 | gid: 0 | sz: 15 |  | Tue Nov 20 17:02:27 2018
+[ 69] opcode: 0010 | result:   15 | fd_nr: 30 | mode: 0100644 | uid: 0 | gid: 0 | sz: 15 |  | Tue Nov 20 17:02:27 2018
+[ 70] opcode: 0010 | result:   15 | fd_nr: 31 | mode: 0100644 | uid: 0 | gid: 0 | sz: 15 |  | Tue Nov 20 17:02:27 2018
+[ 71] opcode: 0010 | result:   15 | fd_nr: 32 | mode: 0100644 | uid: 0 | gid: 0 | sz: 15 |  | Tue Nov 20 17:02:27 2018
+[ 72] opcode: 0010 | result:   15 | fd_nr: 33 | mode: 0100644 | uid: 0 | gid: 0 | sz: 15 |  | Tue Nov 20 17:02:27 2018
+[ 73] opcode: 0010 | result:   15 | fd_nr: 34 | mode: 0100644 | uid: 0 | gid: 0 | sz: 15 |  | Tue Nov 20 17:02:27 2018
+[ 74] opcode: 0010 | result:   15 | fd_nr: 35 | mode: 0100644 | uid: 0 | gid: 0 | sz: 15 |  | Tue Nov 20 17:02:27 2018
+[ 75] opcode: 0010 | result:   15 | fd_nr: 36 | mode: 0100644 | uid: 0 | gid: 0 | sz: 15 |  | Tue Nov 20 17:02:27 2018
+[ 76] opcode: 0010 | result:   15 | fd_nr: 37 | mode: 0100644 | uid: 0 | gid: 0 | sz: 15 |  | Tue Nov 20 17:02:27 2018
+[ 77] opcode: 0010 | result:   15 | fd_nr: 38 | mode: 0100644 | uid: 0 | gid: 0 | sz: 15 |  | Tue Nov 20 17:02:27 2018
+[ 78] opcode: 0010 | result:   15 | fd_nr: 39 | mode: 0100644 | uid: 0 | gid: 0 | sz: 15 |  | Tue Nov 20 17:02:27 2018
+[ 79] opcode: 0010 | result:   15 | fd_nr: 40 | mode: 0100644 | uid: 0 | gid: 0 | sz: 15 |  | Tue Nov 20 17:02:27 2018
+[ 80] opcode: 0010 | result:   15 | fd_nr: 41 | mode: 0100644 | uid: 0 | gid: 0 | sz: 15 |  | Tue Nov 20 17:02:27 2018
+[ 81] opcode: 0010 | result:   15 | fd_nr: 42 | mode: 0100644 | uid: 0 | gid: 0 | sz: 15 |  | Tue Nov 20 17:02:27 2018
+[ 82] opcode: 0004 | result:   14 | fd_nr:  3 | mode: 0100644 | uid: 0 | gid: 0 | sz: 15 |  | Tue Nov 20 17:02:27 2018
+[ 83] opcode: 0004 | result:   14 | fd_nr:  4 | mode: 0100644 | uid: 0 | gid: 0 | sz: 15 |  | Tue Nov 20 17:02:27 2018
+[ 84] opcode: 0004 | result:   14 | fd_nr:  5 | mode: 0100644 | uid: 0 | gid: 0 | sz: 15 |  | Tue Nov 20 17:02:27 2018
+[ 85] opcode: 0004 | result:   14 | fd_nr:  6 | mode: 0100644 | uid: 0 | gid: 0 | sz: 15 |  | Tue Nov 20 17:02:27 2018
+[ 86] opcode: 0004 | result:   14 | fd_nr:  7 | mode: 0100644 | uid: 0 | gid: 0 | sz: 15 |  | Tue Nov 20 17:02:27 2018
+[ 87] opcode: 0004 | result:   14 | fd_nr:  8 | mode: 0100644 | uid: 0 | gid: 0 | sz: 15 |  | Tue Nov 20 17:02:27 2018
+[ 88] opcode: 0004 | result:   14 | fd_nr:  9 | mode: 0100644 | uid: 0 | gid: 0 | sz: 15 |  | Tue Nov 20 17:02:27 2018
+[ 89] opcode: 0004 | result:   14 | fd_nr: 10 | mode: 0100644 | uid: 0 | gid: 0 | sz: 15 |  | Tue Nov 20 17:02:27 2018
+[ 90] opcode: 0004 | result:   14 | fd_nr: 11 | mode: 0100644 | uid: 0 | gid: 0 | sz: 15 |  | Tue Nov 20 17:02:27 2018
+[ 91] opcode: 0004 | result:   14 | fd_nr: 12 | mode: 0100644 | uid: 0 | gid: 0 | sz: 15 |  | Tue Nov 20 17:02:27 2018
+[ 92] opcode: 0004 | result:   14 | fd_nr: 13 | mode: 0100644 | uid: 0 | gid: 0 | sz: 15 |  | Tue Nov 20 17:02:27 2018
+[ 93] opcode: 0004 | result:   14 | fd_nr: 14 | mode: 0100644 | uid: 0 | gid: 0 | sz: 15 |  | Tue Nov 20 17:02:27 2018
+[ 94] opcode: 0004 | result:   14 | fd_nr: 15 | mode: 0100644 | uid: 0 | gid: 0 | sz: 15 |  | Tue Nov 20 17:02:27 2018
+[ 95] opcode: 0004 | result:   14 | fd_nr: 16 | mode: 0100644 | uid: 0 | gid: 0 | sz: 15 |  | Tue Nov 20 17:02:27 2018
+[ 96] opcode: 0004 | result:   14 | fd_nr: 17 | mode: 0100644 | uid: 0 | gid: 0 | sz: 15 |  | Tue Nov 20 17:02:27 2018
+[ 97] opcode: 0004 | result:   14 | fd_nr: 18 | mode: 0100644 | uid: 0 | gid: 0 | sz: 15 |  | Tue Nov 20 17:02:27 2018
+[ 98] opcode: 0004 | result:   14 | fd_nr: 19 | mode: 0100644 | uid: 0 | gid: 0 | sz: 15 |  | Tue Nov 20 17:02:27 2018
+[ 99] opcode: 0004 | result:   14 | fd_nr: 20 | mode: 0100644 | uid: 0 | gid: 0 | sz: 15 |  | Tue Nov 20 17:02:27 2018
+[100] opcode: 0004 | result:   14 | fd_nr: 21 | mode: 0100644 | uid: 0 | gid: 0 | sz: 15 |  | Tue Nov 20 17:02:27 2018
+[101] opcode: 0004 | result:   14 | fd_nr: 22 | mode: 0100644 | uid: 0 | gid: 0 | sz: 15 |  | Tue Nov 20 17:02:27 2018
+[102] opcode: 0004 | result:   14 | fd_nr: 23 | mode: 0100644 | uid: 0 | gid: 0 | sz: 15 |  | Tue Nov 20 17:02:27 2018
+[103] opcode: 0004 | result:   14 | fd_nr: 24 | mode: 0100644 | uid: 0 | gid: 0 | sz: 15 |  | Tue Nov 20 17:02:27 2018
+[104] opcode: 0004 | result:   14 | fd_nr: 25 | mode: 0100644 | uid: 0 | gid: 0 | sz: 15 |  | Tue Nov 20 17:02:27 2018
+[105] opcode: 0004 | result:   14 | fd_nr: 26 | mode: 0100644 | uid: 0 | gid: 0 | sz: 15 |  | Tue Nov 20 17:02:27 2018
+[106] opcode: 0004 | result:   14 | fd_nr: 27 | mode: 0100644 | uid: 0 | gid: 0 | sz: 15 |  | Tue Nov 20 17:02:27 2018
+[107] opcode: 0004 | result:   14 | fd_nr: 28 | mode: 0100644 | uid: 0 | gid: 0 | sz: 15 |  | Tue Nov 20 17:02:27 2018
+[108] opcode: 0004 | result:   14 | fd_nr: 29 | mode: 0100644 | uid: 0 | gid: 0 | sz: 15 |  | Tue Nov 20 17:02:27 2018
+[109] opcode: 0004 | result:   14 | fd_nr: 30 | mode: 0100644 | uid: 0 | gid: 0 | sz: 15 |  | Tue Nov 20 17:02:27 2018
+[110] opcode: 0004 | result:   14 | fd_nr: 31 | mode: 0100644 | uid: 0 | gid: 0 | sz: 15 |  | Tue Nov 20 17:02:27 2018
+[111] opcode: 0004 | result:   14 | fd_nr: 32 | mode: 0100644 | uid: 0 | gid: 0 | sz: 15 |  | Tue Nov 20 17:02:27 2018
+[112] opcode: 0004 | result:   14 | fd_nr: 33 | mode: 0100644 | uid: 0 | gid: 0 | sz: 15 |  | Tue Nov 20 17:02:27 2018
+[113] opcode: 0004 | result:   14 | fd_nr: 34 | mode: 0100644 | uid: 0 | gid: 0 | sz: 15 |  | Tue Nov 20 17:02:27 2018
+[114] opcode: 0004 | result:   14 | fd_nr: 35 | mode: 0100644 | uid: 0 | gid: 0 | sz: 15 |  | Tue Nov 20 17:02:27 2018
+[115] opcode: 0004 | result:   14 | fd_nr: 36 | mode: 0100644 | uid: 0 | gid: 0 | sz: 15 |  | Tue Nov 20 17:02:27 2018
+[116] opcode: 0004 | result:   14 | fd_nr: 37 | mode: 0100644 | uid: 0 | gid: 0 | sz: 15 |  | Tue Nov 20 17:02:27 2018
+[117] opcode: 0004 | result:   14 | fd_nr: 38 | mode: 0100644 | uid: 0 | gid: 0 | sz: 15 |  | Tue Nov 20 17:02:27 2018
+[118] opcode: 0004 | result:   14 | fd_nr: 39 | mode: 0100644 | uid: 0 | gid: 0 | sz: 15 |  | Tue Nov 20 17:02:27 2018
+[119] opcode: 0004 | result:   14 | fd_nr: 40 | mode: 0100644 | uid: 0 | gid: 0 | sz: 15 |  | Tue Nov 20 17:02:27 2018
+[120] opcode: 0004 | result:   14 | fd_nr: 41 | mode: 0100644 | uid: 0 | gid: 0 | sz: 15 |  | Tue Nov 20 17:02:27 2018
+[121] opcode: 0004 | result:   14 | fd_nr: 42 | mode: 0100644 | uid: 0 | gid: 0 | sz: 15 |  | Tue Nov 20 17:02:27 2018
+[122] opcode: 0002 | result:    0 | fd_nr:  3 | mode: 0100644 | uid: 0 | gid: 0 | sz: 15 |  | Tue Nov 20 17:02:27 2018
+[123] opcode: 0002 | result:    0 | fd_nr:  4 | mode: 0100644 | uid: 0 | gid: 0 | sz: 15 |  | Tue Nov 20 17:02:27 2018
+[124] opcode: 0002 | result:    0 | fd_nr:  5 | mode: 0100644 | uid: 0 | gid: 0 | sz: 15 |  | Tue Nov 20 17:02:27 2018
+[125] opcode: 0002 | result:    0 | fd_nr:  6 | mode: 0100644 | uid: 0 | gid: 0 | sz: 15 |  | Tue Nov 20 17:02:27 2018
+[126] opcode: 0002 | result:    0 | fd_nr:  7 | mode: 0100644 | uid: 0 | gid: 0 | sz: 15 |  | Tue Nov 20 17:02:27 2018
+[127] opcode: 0002 | result:    0 | fd_nr:  8 | mode: 0100644 | uid: 0 | gid: 0 | sz: 15 |  | Tue Nov 20 17:02:27 2018
+[128] opcode: 0002 | result:    0 | fd_nr:  9 | mode: 0100644 | uid: 0 | gid: 0 | sz: 15 |  | Tue Nov 20 17:02:27 2018
+[129] opcode: 0002 | result:    0 | fd_nr: 10 | mode: 0100644 | uid: 0 | gid: 0 | sz: 15 |  | Tue Nov 20 17:02:27 2018
+[130] opcode: 0002 | result:    0 | fd_nr: 11 | mode: 0100644 | uid: 0 | gid: 0 | sz: 15 |  | Tue Nov 20 17:02:27 2018
+[131] opcode: 0002 | result:    0 | fd_nr: 12 | mode: 0100644 | uid: 0 | gid: 0 | sz: 15 |  | Tue Nov 20 17:02:27 2018
+[132] opcode: 0002 | result:    0 | fd_nr: 13 | mode: 0100644 | uid: 0 | gid: 0 | sz: 15 |  | Tue Nov 20 17:02:27 2018
+[133] opcode: 0002 | result:    0 | fd_nr: 14 | mode: 0100644 | uid: 0 | gid: 0 | sz: 15 |  | Tue Nov 20 17:02:27 2018
+[134] opcode: 0002 | result:    0 | fd_nr: 15 | mode: 0100644 | uid: 0 | gid: 0 | sz: 15 |  | Tue Nov 20 17:02:27 2018
+[135] opcode: 0002 | result:    0 | fd_nr: 16 | mode: 0100644 | uid: 0 | gid: 0 | sz: 15 |  | Tue Nov 20 17:02:27 2018
+[136] opcode: 0002 | result:    0 | fd_nr: 17 | mode: 0100644 | uid: 0 | gid: 0 | sz: 15 |  | Tue Nov 20 17:02:27 2018
+[137] opcode: 0002 | result:    0 | fd_nr: 18 | mode: 0100644 | uid: 0 | gid: 0 | sz: 15 |  | Tue Nov 20 17:02:27 2018
+[138] opcode: 0002 | result:    0 | fd_nr: 19 | mode: 0100644 | uid: 0 | gid: 0 | sz: 15 |  | Tue Nov 20 17:02:27 2018
+[139] opcode: 0002 | result:    0 | fd_nr: 20 | mode: 0100644 | uid: 0 | gid: 0 | sz: 15 |  | Tue Nov 20 17:02:27 2018
+[140] opcode: 0002 | result:    0 | fd_nr: 21 | mode: 0100644 | uid: 0 | gid: 0 | sz: 15 |  | Tue Nov 20 17:02:27 2018
+[141] opcode: 0002 | result:    0 | fd_nr: 22 | mode: 0100644 | uid: 0 | gid: 0 | sz: 15 |  | Tue Nov 20 17:02:27 2018
+[142] opcode: 0002 | result:    0 | fd_nr: 23 | mode: 0100644 | uid: 0 | gid: 0 | sz: 15 |  | Tue Nov 20 17:02:27 2018
+[143] opcode: 0002 | result:    0 | fd_nr: 24 | mode: 0100644 | uid: 0 | gid: 0 | sz: 15 |  | Tue Nov 20 17:02:27 2018
+[144] opcode: 0002 | result:    0 | fd_nr: 25 | mode: 0100644 | uid: 0 | gid: 0 | sz: 15 |  | Tue Nov 20 17:02:27 2018
+[145] opcode: 0002 | result:    0 | fd_nr: 26 | mode: 0100644 | uid: 0 | gid: 0 | sz: 15 |  | Tue Nov 20 17:02:27 2018
+[146] opcode: 0002 | result:    0 | fd_nr: 27 | mode: 0100644 | uid: 0 | gid: 0 | sz: 15 |  | Tue Nov 20 17:02:27 2018
+[147] opcode: 0002 | result:    0 | fd_nr: 28 | mode: 0100644 | uid: 0 | gid: 0 | sz: 15 |  | Tue Nov 20 17:02:27 2018
+[148] opcode: 0002 | result:    0 | fd_nr: 29 | mode: 0100644 | uid: 0 | gid: 0 | sz: 15 |  | Tue Nov 20 17:02:27 2018
+[149] opcode: 0002 | result:    0 | fd_nr: 30 | mode: 0100644 | uid: 0 | gid: 0 | sz: 15 |  | Tue Nov 20 17:02:27 2018
+[150] opcode: 0002 | result:    0 | fd_nr: 31 | mode: 0100644 | uid: 0 | gid: 0 | sz: 15 |  | Tue Nov 20 17:02:27 2018
+[151] opcode: 0002 | result:    0 | fd_nr: 32 | mode: 0100644 | uid: 0 | gid: 0 | sz: 15 |  | Tue Nov 20 17:02:27 2018
+[152] opcode: 0002 | result:    0 | fd_nr: 33 | mode: 0100644 | uid: 0 | gid: 0 | sz: 15 |  | Tue Nov 20 17:02:27 2018
+[153] opcode: 0002 | result:    0 | fd_nr: 34 | mode: 0100644 | uid: 0 | gid: 0 | sz: 15 |  | Tue Nov 20 17:02:27 2018
+[154] opcode: 0002 | result:    0 | fd_nr: 35 | mode: 0100644 | uid: 0 | gid: 0 | sz: 15 |  | Tue Nov 20 17:02:27 2018
+[155] opcode: 0002 | result:    0 | fd_nr: 36 | mode: 0100644 | uid: 0 | gid: 0 | sz: 15 |  | Tue Nov 20 17:02:27 2018
+[156] opcode: 0002 | result:    0 | fd_nr: 37 | mode: 0100644 | uid: 0 | gid: 0 | sz: 15 |  | Tue Nov 20 17:02:27 2018
+[157] opcode: 0002 | result:    0 | fd_nr: 38 | mode: 0100644 | uid: 0 | gid: 0 | sz: 15 |  | Tue Nov 20 17:02:27 2018
+[158] opcode: 0002 | result:    0 | fd_nr: 39 | mode: 0100644 | uid: 0 | gid: 0 | sz: 15 |  | Tue Nov 20 17:02:27 2018
+[159] opcode: 0002 | result:    0 | fd_nr: 40 | mode: 0100644 | uid: 0 | gid: 0 | sz: 15 |  | Tue Nov 20 17:02:27 2018
+[160] opcode: 0002 | result:    0 | fd_nr: 41 | mode: 0100644 | uid: 0 | gid: 0 | sz: 15 |  | Tue Nov 20 17:02:27 2018
+[161] opcode: 0002 | result:    0 | fd_nr: 42 | mode: 0100644 | uid: 0 | gid: 0 | sz: 15 |  | Tue Nov 20 17:02:27 2018
+[162] opcode: 0040 | result:    0 | fd_nr:  0 | mode: 0 | uid: 0 | gid: 0 | sz: 0 | 00_fslog_test | Tue Nov 20 17:02:27 2018
+[163] opcode: 0040 | result:    0 | fd_nr:  0 | mode: 0 | uid: 0 | gid: 0 | sz: 0 | 01_fslog_test | Tue Nov 20 17:02:27 2018
+[164] opcode: 0040 | result:    0 | fd_nr:  0 | mode: 0 | uid: 0 | gid: 0 | sz: 0 | 02_fslog_test | Tue Nov 20 17:02:27 2018
+[165] opcode: 0040 | result:    0 | fd_nr:  0 | mode: 0 | uid: 0 | gid: 0 | sz: 0 | 03_fslog_test | Tue Nov 20 17:02:27 2018
+[166] opcode: 0040 | result:    0 | fd_nr:  0 | mode: 0 | uid: 0 | gid: 0 | sz: 0 | 04_fslog_test | Tue Nov 20 17:02:27 2018
+[167] opcode: 0040 | result:    0 | fd_nr:  0 | mode: 0 | uid: 0 | gid: 0 | sz: 0 | 05_fslog_test | Tue Nov 20 17:02:27 2018
+[168] opcode: 0040 | result:    0 | fd_nr:  0 | mode: 0 | uid: 0 | gid: 0 | sz: 0 | 06_fslog_test | Tue Nov 20 17:02:27 2018
+[169] opcode: 0040 | result:    0 | fd_nr:  0 | mode: 0 | uid: 0 | gid: 0 | sz: 0 | 07_fslog_test | Tue Nov 20 17:02:27 2018
+[170] opcode: 0040 | result:    0 | fd_nr:  0 | mode: 0 | uid: 0 | gid: 0 | sz: 0 | 08_fslog_test | Tue Nov 20 17:02:27 2018
+[171] opcode: 0040 | result:    0 | fd_nr:  0 | mode: 0 | uid: 0 | gid: 0 | sz: 0 | 09_fslog_test | Tue Nov 20 17:02:27 2018
+[172] opcode: 0040 | result:    0 | fd_nr:  0 | mode: 0 | uid: 0 | gid: 0 | sz: 0 | 10_fslog_test | Tue Nov 20 17:02:27 2018
+[173] opcode: 0040 | result:    0 | fd_nr:  0 | mode: 0 | uid: 0 | gid: 0 | sz: 0 | 11_fslog_test | Tue Nov 20 17:02:27 2018
+[174] opcode: 0040 | result:    0 | fd_nr:  0 | mode: 0 | uid: 0 | gid: 0 | sz: 0 | 12_fslog_test | Tue Nov 20 17:02:27 2018
+[175] opcode: 0040 | result:    0 | fd_nr:  0 | mode: 0 | uid: 0 | gid: 0 | sz: 0 | 13_fslog_test | Tue Nov 20 17:02:27 2018
+[176] opcode: 0040 | result:    0 | fd_nr:  0 | mode: 0 | uid: 0 | gid: 0 | sz: 0 | 14_fslog_test | Tue Nov 20 17:02:27 2018
+[177] opcode: 0040 | result:    0 | fd_nr:  0 | mode: 0 | uid: 0 | gid: 0 | sz: 0 | 15_fslog_test | Tue Nov 20 17:02:27 2018
+[178] opcode: 0040 | result:    0 | fd_nr:  0 | mode: 0 | uid: 0 | gid: 0 | sz: 0 | 16_fslog_test | Tue Nov 20 17:02:27 2018
+[179] opcode: 0040 | result:    0 | fd_nr:  0 | mode: 0 | uid: 0 | gid: 0 | sz: 0 | 17_fslog_test | Tue Nov 20 17:02:27 2018
+[180] opcode: 0040 | result:    0 | fd_nr:  0 | mode: 0 | uid: 0 | gid: 0 | sz: 0 | 18_fslog_test | Tue Nov 20 17:02:27 2018
+[181] opcode: 0040 | result:    0 | fd_nr:  0 | mode: 0 | uid: 0 | gid: 0 | sz: 0 | 19_fslog_test | Tue Nov 20 17:02:27 2018
+[182] opcode: 0040 | result:    0 | fd_nr:  0 | mode: 0 | uid: 0 | gid: 0 | sz: 0 | 20_fslog_test | Tue Nov 20 17:02:27 2018
+[183] opcode: 0040 | result:    0 | fd_nr:  0 | mode: 0 | uid: 0 | gid: 0 | sz: 0 | 21_fslog_test | Tue Nov 20 17:02:27 2018
+[184] opcode: 0040 | result:    0 | fd_nr:  0 | mode: 0 | uid: 0 | gid: 0 | sz: 0 | 22_fslog_test | Tue Nov 20 17:02:27 2018
+[185] opcode: 0040 | result:    0 | fd_nr:  0 | mode: 0 | uid: 0 | gid: 0 | sz: 0 | 23_fslog_test | Tue Nov 20 17:02:27 2018
+[186] opcode: 0040 | result:    0 | fd_nr:  0 | mode: 0 | uid: 0 | gid: 0 | sz: 0 | 24_fslog_test | Tue Nov 20 17:02:27 2018
+[187] opcode: 0040 | result:    0 | fd_nr:  0 | mode: 0 | uid: 0 | gid: 0 | sz: 0 | 25_fslog_test | Tue Nov 20 17:02:27 2018
+[188] opcode: 0040 | result:    0 | fd_nr:  0 | mode: 0 | uid: 0 | gid: 0 | sz: 0 | 26_fslog_test | Tue Nov 20 17:02:27 2018
+[189] opcode: 0040 | result:    0 | fd_nr:  0 | mode: 0 | uid: 0 | gid: 0 | sz: 0 | 27_fslog_test | Tue Nov 20 17:02:27 2018
+[190] opcode: 0040 | result:    0 | fd_nr:  0 | mode: 0 | uid: 0 | gid: 0 | sz: 0 | 28_fslog_test | Tue Nov 20 17:02:27 2018
+[191] opcode: 0040 | result:    0 | fd_nr:  0 | mode: 0 | uid: 0 | gid: 0 | sz: 0 | 29_fslog_test | Tue Nov 20 17:02:27 2018
+[192] opcode: 0040 | result:    0 | fd_nr:  0 | mode: 0 | uid: 0 | gid: 0 | sz: 0 | 30_fslog_test | Tue Nov 20 17:02:27 2018
+[193] opcode: 0040 | result:    0 | fd_nr:  0 | mode: 0 | uid: 0 | gid: 0 | sz: 0 | 31_fslog_test | Tue Nov 20 17:02:27 2018
+[194] opcode: 0040 | result:    0 | fd_nr:  0 | mode: 0 | uid: 0 | gid: 0 | sz: 0 | 32_fslog_test | Tue Nov 20 17:02:27 2018
+[195] opcode: 0040 | result:    0 | fd_nr:  0 | mode: 0 | uid: 0 | gid: 0 | sz: 0 | 33_fslog_test | Tue Nov 20 17:02:27 2018
+[196] opcode: 0040 | result:    0 | fd_nr:  0 | mode: 0 | uid: 0 | gid: 0 | sz: 0 | 34_fslog_test | Tue Nov 20 17:02:27 2018
+[197] opcode: 0040 | result:    0 | fd_nr:  0 | mode: 0 | uid: 0 | gid: 0 | sz: 0 | 35_fslog_test | Tue Nov 20 17:02:27 2018
+[198] opcode: 0040 | result:    0 | fd_nr:  0 | mode: 0 | uid: 0 | gid: 0 | sz: 0 | 36_fslog_test | Tue Nov 20 17:02:27 2018
+[199] opcode: 0040 | result:    0 | fd_nr:  0 | mode: 0 | uid: 0 | gid: 0 | sz: 0 | 37_fslog_test | Tue Nov 20 17:02:27 2018
+[  0] opcode: 0040 | result:    0 | fd_nr:  0 | mode: 0 | uid: 0 | gid: 0 | sz: 0 | 38_fslog_test | Tue Nov 20 17:02:27 2018
+[  1] opcode: 0040 | result:    0 | fd_nr:  0 | mode: 0 | uid: 0 | gid: 0 | sz: 0 | 39_fslog_test | Tue Nov 20 17:02:27 2018
+-------------------------------------------------------------
+... success
+--------------------------------------------------------------
