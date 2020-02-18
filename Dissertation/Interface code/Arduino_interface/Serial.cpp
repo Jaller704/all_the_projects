@@ -1,4 +1,4 @@
-// Code taken from https://playground.arduino.cc/Interfacing/CPPWindows/
+// Code taken unmodified from https://playground.arduino.cc/Interfacing/CPPWindows/
 #include "SerialClass.h"
 
 Serial::Serial(const char* portName)

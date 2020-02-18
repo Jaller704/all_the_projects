@@ -1,4 +1,4 @@
-// Code taken from https://playground.arduino.cc/Interfacing/CPPWindows/
+// Code taken unmodified from https://playground.arduino.cc/Interfacing/CPPWindows/
 #ifndef SERIALCLASS_H_INCLUDED
 #define SERIALCLASS_H_INCLUDED
 

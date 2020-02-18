@@ -125,10 +125,12 @@
   <ItemGroup>
     <ClCompile Include="CLInterface.cpp" />
     <ClCompile Include="Serial.cpp" />
+    <ClCompile Include="ArduinoCommand.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CLInterface.h" />
     <ClInclude Include="SerialClass.h" />
+    <ClInclude Include="ArduinoCommand.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

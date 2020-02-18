@@ -21,12 +21,18 @@
     <ClCompile Include="Serial.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ArduinoCommand.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CLInterface.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="SerialClass.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ArduinoCommand.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
