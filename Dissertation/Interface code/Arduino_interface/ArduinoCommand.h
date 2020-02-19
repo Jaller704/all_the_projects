@@ -5,8 +5,7 @@
 #include <vector>
 
 using namespace std;
-class ArduinoCommand
-{
+class ArduinoCommand {
 public:
 	/*
 	* Takes in raw string representation of the entire command
