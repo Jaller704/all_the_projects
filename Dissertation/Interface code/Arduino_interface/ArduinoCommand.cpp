@@ -60,9 +60,12 @@ ArduinoCommand::ArduinoCommand(string name, vector<int> params) {
 	this->full_command = unique_ptr<string>(new string(ss.str()));
 }
 
-string ArduinoCommand::getSerialCommand()
-{
+string ArduinoCommand::getSerialCommand() {
 	return *full_command;
+}
+
+string ArduinoCommand::getName() {
+	return command_name;
 }
 
 void ArduinoCommand::stringSplit(const string& input, vector<string>& split_string, char delim = ' ') {

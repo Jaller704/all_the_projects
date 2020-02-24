@@ -18,5 +18,6 @@ private:
 
 	vector<string> valid_commands;
 	Serial link;
+	char read_buffer[11];
 };
 

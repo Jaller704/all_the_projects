@@ -24,9 +24,14 @@ public:
 	* Return the full_command which has been formatted for the serial console.
 	*/
 	string getSerialCommand();
+
+	/*
+	* Return the name of the command.
+	*/
+	string getName();
 private:
 	/*
-	* Splits theinput string based on a delimiter and puts the contents 
+	* Splits the input string based on a delimiter and puts the contents 
 	* into a string vector.
 	*/
 	void stringSplit(const string& input, vector<string>& split_string, char delim = ' ');
