@@ -73,3 +73,5 @@ Dissertation/UnrealEngine/DissProject4_24/Plugins/*/Intermediate/*
 
 # Cache files for the editor to use
 Dissertation/UnrealEngine/DissProject4_24/DerivedDataCache/*
+
+Dissertation/UnrealEngine/DissProject4_24/Config/DefaultEngine.ini
