@@ -68,7 +68,7 @@ bool ArduinoInterface::write(ArduinoCommand c) {
 	return false;
 }
 
-string ArduinoInterface::read(int timeout = 1000) {
+string ArduinoInterface::read() {
 	int bytes_read = link.ReadData(read_buffer, 20);
 	string read_string = read_buffer;
 	
@@ -83,11 +83,16 @@ string ArduinoInterface::read(int timeout = 1000) {
 	else {
 		return read_string;
 	}
+	return "Unknown error";
 	
 }
 
 string ArduinoInterface::writeRead(ArduinoCommand c) {
-	return string();
+	if (write(c)) {
+		return read();
+	} 
+
+	return "writeRead failed";
 }
 
 bool ArduinoInterface::safeCommand(ArduinoCommand c) {

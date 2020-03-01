@@ -9,7 +9,7 @@ public:
 
 	void config();
 	bool write(ArduinoCommand c);
-	string read(int timeout = 1000);
+	string read();
 	string writeRead(ArduinoCommand c);
 
 
