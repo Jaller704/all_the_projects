@@ -14,7 +14,12 @@ Stepper hume_step
 
 
 void setup() {
-  // put your setup code here, to run once:
+  fore_servo.attach();
+  twrist_servo.attach();
+  bwrist_servo.attach();
+  lwrist_servo.attach();
+  rwrist_servo.attach();
+  
 
 }
 
