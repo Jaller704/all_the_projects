@@ -127,6 +127,7 @@
     <ClCompile Include="CLInterface.cpp" />
     <ClCompile Include="Serial.cpp" />
     <ClCompile Include="ArduinoCommand.cpp" />
+    <ClCompile Include="Test.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ArduinoInterface.h" />

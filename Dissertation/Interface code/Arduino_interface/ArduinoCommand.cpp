@@ -31,7 +31,7 @@ ArduinoCommand::ArduinoCommand(string raw_command) {
 	}
 	ss << "\r\n";
 
-	this->full_command = unique_ptr<string>(new string(ss.str()));
+	this->full_command.reset(new string(ss.str()));
 
 }
 
@@ -57,7 +57,7 @@ ArduinoCommand::ArduinoCommand(string name, vector<int> params) {
 	}
 	ss << "\r\n";
 
-	this->full_command = unique_ptr<string>(new string(ss.str()));
+	this->full_command.reset(new string(ss.str()));
 }
 
 string ArduinoCommand::getSerialCommand() {
