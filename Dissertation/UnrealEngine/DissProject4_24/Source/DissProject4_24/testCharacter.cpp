@@ -1,17 +1,14 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-#include "MyPawn.h"
+
+#include "testCharacter.h"
 
 #include "DissProject4_24.h"
-#include "HeadMountedDisplay.h"
-#include "MotionControllerComponent.h"
-#include "Components/StaticMeshComponent.h"
-#include "Engine/StaticMesh.h"
 
 // Sets default values
-AMyPawn::AMyPawn()
+AtestCharacter::AtestCharacter()
 {
- 	// Set this pawn to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
+ 	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
 	VROriginComp = CreateDefaultSubobject<USceneComponent>(TEXT("VRCameraOrigin"));
@@ -23,33 +20,33 @@ AMyPawn::AMyPawn()
 
 
 	MC_right = CreateDefaultSubobject<UMotionControllerComponent>(TEXT("RightHand"));
-	MC_right->MotionSource = "Right";
+	MC_right->MotionSource = "RightWristCenter";
 	MC_right->SetupAttachment(VROriginComp);
 
-	/*UStaticMeshComponent* SM_right = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("RightHandMesh"));
-	UStaticMesh* test = new UStaticMesh();
-	SM_right->SetStaticMesh();
-	SM_right->SetupAttachment(MC_right);*/
-
+	SM_right = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("RightHandMesh"));
+	SM_right->SetupAttachment(MC_right);
 
 }
 
 // Called when the game starts or when spawned
-void AMyPawn::BeginPlay()
+void AtestCharacter::BeginPlay()
 {
 	Super::BeginPlay();
+
+	FVector loc = SM_right->GetComponentLocation();
+	
 	
 }
 
 // Called every frame
-void AMyPawn::Tick(float DeltaTime)
+void AtestCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
 }
 
 // Called to bind functionality to input
-void AMyPawn::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
+void AtestCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 

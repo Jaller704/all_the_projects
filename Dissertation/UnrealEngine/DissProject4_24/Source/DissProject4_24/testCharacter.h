@@ -3,19 +3,22 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "GameFramework/Pawn.h"
+#include "GameFramework/Character.h"
 #include "Camera/CameraComponent.h"
-#include "MyPawn.generated.h"
-
+#include "HeadMountedDisplay.h"
+#include "MotionControllerComponent.h"
+#include "Components/StaticMeshComponent.h"
+#include "Engine/StaticMesh.h"
+#include "testCharacter.generated.h"
 
 UCLASS()
-class DISSPROJECT4_24_API AMyPawn : public APawn
+class DISSPROJECT4_24_API AtestCharacter : public ACharacter
 {
 	GENERATED_BODY()
 
 public:
-	// Sets default values for this pawn's properties
-	AMyPawn();
+	// Sets default values for this character's properties
+	AtestCharacter();
 
 protected:
 	// Called when the game starts or when spawned
@@ -33,8 +36,8 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Components")
 		class UMotionControllerComponent* MC_right;
 
-	/*UPROPERTY(EditDefaultsOnly, Category = "Components")
-		class UStaticMeshComponent* SM_right;*/
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Components")
+		class UStaticMeshComponent* SM_right;
 
 public:	
 	// Called every frame
