@@ -9,8 +9,8 @@ void ArduinoInterface::config() {
 	cout << "Getting commands from arduino..." << endl;
 
 	//Send a command to the arduino to get it to return all of its commands to the serial console
-	ArduinoCommand config = ArduinoCommand("CONFIG");
-	string s = config.getSerialCommand();
+	ArduinoCommand config_command = ArduinoCommand("CONFIG");
+	string s = config_command.getSerialCommand();
 
 	//Check that the write is a success before we can do anything
 	if (link.WriteData(s.c_str(), s.length())) {
