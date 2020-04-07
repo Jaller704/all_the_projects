@@ -5,9 +5,15 @@
 #include <Encoder.h>
 
 #define elbow_tlimit_pin 0
-#define elbow_blimit_pin 1
+#define elbow_blimit_pin 2
 #define hume_rlimit_pin 12
 #define hume_llimit_pin 7
+#define elbow_step_pin 13
+#define shoulder_step_pin 4
+#define hume_step_pin 8
+#define elbow_direct_pin 6
+#define shoulder_direct_pin 9
+#define hume_direct_pin 10
 
 
 Servo fore_servo;
@@ -16,21 +22,14 @@ Servo bwrist_servo;
 Servo lwrist_servo;
 Servo rwrist_servo;
 
-int elbow_step_pin = 13;
-int shoulder_step_pin = 4;
-int hume_step_pin = 8;
-int elbow_direct_pin = 6;
-int shoulder_direct_pin = 9;
-int hume_direct_pin = 10;
-
-Encoder shoulder_enc(2, 3);
+Encoder shoulder_enc(1, 3);
 //Not enough pins for more encoders on the Uno I have currently
 //Encoder elbow_enc(13,12);
 //Encoder hume_enc(13,12);
 
 SerialCommand cmd;
 
-bool zeroed;
+bool zeroed = false;
 
 void runConfig();
 void rotateForearm();
@@ -62,10 +61,10 @@ void setup() {
   pinMode(shoulder_direct_pin, OUTPUT);
   pinMode(hume_direct_pin, OUTPUT);
 
-  pinMode(elbow_tlimit_pin, INPUT);
-  pinMode(elbow_blimit_pin, INPUT);
-  pinMode(hume_rlimit_pin, INPUT);
-  pinMode(hume_llimit_pin, INPUT);
+  pinMode(elbow_tlimit_pin, INPUT_PULLUP);
+  pinMode(elbow_blimit_pin, INPUT_PULLUP);
+  pinMode(hume_rlimit_pin, INPUT_PULLUP);
+  pinMode(hume_llimit_pin, INPUT_PULLUP);
   
   Serial.begin(9600);
   //empty loop that stays true until the serial port is ready
@@ -89,26 +88,39 @@ void setup() {
   cmd.addCommand("GET_WRTH_POS", getWristHorzPosition);
 
   cmd.addCommand("PIV_WRTV", pivotWristVert);
-  cmd.addCommand("GET_WRTV_POS", getWristVertPosition);
-
-  zeroed = false;
+  cmd.addCommand("GET_WRTV_POS", getWristVertPosition); 
 }
+
+bool elbow_limit_hit = false;
+bool hume_limit_hit = false;
 
 void loop() {
   if (!zeroed) {
     //move each motor until their resepctive limit switches are hit
-    while(!digitalRead(elbow_blimit_pin)) {
+    if(digitalRead(elbow_blimit_pin) == HIGH && !elbow_limit_hit) {
+      Serial.println("ELBOW LIMIT NOT HIT");
       digitalWrite(elbow_direct_pin, LOW);
       digitalWrite(elbow_step_pin, HIGH);
+    } else if (digitalRead(elbow_blimit_pin) == LOW){
+      elbow_limit_hit = true;
+      Serial.println("ELBOW LIMIT HIT");
     }
     
-    while(!digitalRead(hume_rlimit_pin)) {
-    digitalWrite(hume_direct_pin,LOW);
+    if(digitalRead(hume_rlimit_pin) == HIGH && !hume_limit_hit && elbow_limit_hit) {
+      Serial.println("HUME LIMIT NOT HIT");
+      digitalWrite(hume_direct_pin,LOW);
       digitalWrite(hume_step_pin, HIGH);
+    } else if (digitalRead(hume_rlimit_pin) == LOW){
+      hume_limit_hit = true;
+      Serial.println("HUME LIMIT HIT");
     }
 
-    fore_servo.write(0);
-    zeroed = true;
+    if(hume_limit_hit && elbow_limit_hit) {
+      fore_servo.write(0);
+      zeroed = true;
+      Serial.println("ZEROED");
+    }
+    
   } else {
     //readPositions();
     //check if there are commands available 
@@ -168,7 +180,7 @@ void rotateHumerus() {
     }
   }
 
-  Serial.println("HUME_SET" + String(arg));
+  Serial.println("HUME_SET " + String(arg));
   Serial.flush();
 }
 
@@ -193,7 +205,7 @@ void pivotElbow(){
       digitalWrite(elbow_step_pin, HIGH);
     }
   }
-  Serial.println("ELBW_SET" + String(arg));
+  Serial.println("ELBW_SET " + String(arg));
   Serial.flush();
 }
 
@@ -218,12 +230,12 @@ void pivotShoulder(){
       digitalWrite(shoulder_step_pin, HIGH);
     }
   }
-  Serial.println("SHLD_SET" + String(arg));
+  Serial.println("SHLD_SET " + String(arg));
   Serial.flush();
 }
 
 void getShoulderPosition(){
-  Serial.println("SHLD_PIV" + String(shoulder_enc.read()));
+  Serial.println("SHLD_PIV " + String(shoulder_enc.read()));
   Serial.flush();
 }
 
