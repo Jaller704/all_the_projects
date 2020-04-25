@@ -20,6 +20,9 @@ public:
 	*/
 	ArduinoCommand(string name, vector<int> params);
 
+	/*
+	* Copy constructor.
+	*/
 	ArduinoCommand(const ArduinoCommand& c) {
 		this->command_name = c.command_name;
 		copy(c.command_params.begin(), c.command_params.end(), back_inserter(this->command_params));
