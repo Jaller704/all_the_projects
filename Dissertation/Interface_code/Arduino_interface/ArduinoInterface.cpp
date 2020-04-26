@@ -1,7 +1,7 @@
 #include "ArduinoInterface.h"
 #include <iostream>
 
-ArduinoInterface::ArduinoInterface(Serial link) : link(link){
+ArduinoInterface::ArduinoInterface(Serial* link) : link(link){
 	config();
 }
 
@@ -9,11 +9,11 @@ void ArduinoInterface::config() {
 	cout << "Getting commands from arduino..." << endl;
 
 	//Send a command to the arduino to get it to return all of its commands to the serial console
-	ArduinoCommand config = ArduinoCommand("CONFIG");
-	string s = config.getSerialCommand();
+	ArduinoCommand config_command = ArduinoCommand("CONFIG");
+	string s = config_command.getSerialCommand();
 
 	//Check that the write is a success before we can do anything
-	if (link.WriteData(s.c_str(), s.length())) {
+	if (link->WriteData(s.c_str(), s.length())) {
 
 		bool commandsAvailable = true;
 		string received;
@@ -45,19 +45,19 @@ void ArduinoInterface::config() {
 	}
 	else {
 		cout << "Link comm error, config failed" << endl;
-		cout << "Is link still connected? " << link.IsConnected() << endl;
+		cout << "Is link still connected? " << link->IsConnected() << endl;
 	}
 }
 
 bool ArduinoInterface::write(ArduinoCommand c) {
 	string command = c.getSerialCommand();
 	if (safeCommand(c)) {
-		if (link.WriteData(command.c_str(), command.length())) {
+		if (link->WriteData(command.c_str(), command.length())) {
 			return true;
 		}
 		else {
 			cout << "Link comm error, command write failed" << endl;
-			cout << "Is link still connected? " << link.IsConnected() << endl;
+			cout << "Is link still connected? " << link->IsConnected() << endl;
 			return false;
 		}
 	}
@@ -69,7 +69,7 @@ bool ArduinoInterface::write(ArduinoCommand c) {
 }
 
 string ArduinoInterface::read() {
-	int bytes_read = link.ReadData(read_buffer, 20);
+	int bytes_read = link->ReadData(read_buffer, 20);
 	string read_string = read_buffer;
 	
 	if (bytes_read < 11 && bytes_read > 0) {
