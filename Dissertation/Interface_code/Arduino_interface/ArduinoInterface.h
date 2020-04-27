@@ -8,7 +8,7 @@ public:
 	/*
 	* Constructor that runs configuration and sets the serial port link.
 	*/
-	ArduinoInterface(Serial* link);
+	ArduinoInterface(unique_ptr<Serial> link);
 
 	/*
 	* Asks the arduino for its list of commands and sets up a list of
@@ -42,7 +42,7 @@ private:
 	bool safeCommand(ArduinoCommand c);
 
 	vector<string> valid_commands;
-	Serial* link;
+	unique_ptr<Serial> link;
 	char read_buffer[11];
 };
 

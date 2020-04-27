@@ -1,7 +1,7 @@
 #include "ArduinoInterface.h"
 #include <iostream>
 
-ArduinoInterface::ArduinoInterface(Serial* link) : link(link){
+ArduinoInterface::ArduinoInterface(unique_ptr<Serial> link) : link(std::move(link)){
 	config();
 }
 

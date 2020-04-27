@@ -13,7 +13,7 @@ public:
 	/*
 	* Takes in a user prompt and sets up a Serial link to the port entered 
 	*/
-	static Serial* selectSerialPort();
+	static unique_ptr<Serial> selectSerialPort();
 
 	static void interfaceLoop(ArduinoInterface*);
 

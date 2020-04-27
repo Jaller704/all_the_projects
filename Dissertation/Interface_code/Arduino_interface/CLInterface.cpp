@@ -18,7 +18,7 @@ string inputTrim(string raw_input) {
 	return raw_input;
 }
 
-Serial* CLInterface::selectSerialPort() {
+unique_ptr<Serial> CLInterface::selectSerialPort() {
 	string input_port_str;
 	int input_port;
 	stringstream  port_name_str;
@@ -33,7 +33,7 @@ Serial* CLInterface::selectSerialPort() {
 	
 	const std::string& tmp = port_name_str.str();
 	const char* port_name = tmp.c_str();
-	return new Serial(port_name);
+	return unique_ptr<Serial>(new Serial(port_name));
 }
 
 void CLInterface::interfaceLoop(ArduinoInterface* a_interface) {
