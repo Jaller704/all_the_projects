@@ -1,6 +1,7 @@
 #include "CLInterface.h"
 
 int main() {
+
 	ArduinoInterface* a_interface = new ArduinoInterface(CLInterface::selectSerialPort());
 	cout << "Beginning the interface loop" << endl;
 	CLInterface::interfaceLoop(a_interface);
@@ -11,10 +12,14 @@ string inputTrim(string raw_input) {
 	//Find the index of the first letter in the string
 	size_t first_letter = raw_input.find_first_not_of("\t\n\v\f\r ");
 	//Find where the command name ends by looking for the first bit of whitespace after the first letter
-	size_t line_break = raw_input.find_first_of("\t\n\v\f\r ", first_letter);
+	size_t line_break = raw_input.find_first_of("\t\n\v\f\r", first_letter);
 
-	raw_input = raw_input.substr(first_letter, (first_letter - (line_break - 1)));
-
+	if (line_break == string::npos) {
+		raw_input = raw_input.substr(first_letter);
+	}
+	else {
+		raw_input = raw_input.substr(first_letter, (line_break - first_letter));
+	}
 	return raw_input;
 }
 
@@ -38,7 +43,8 @@ unique_ptr<Serial> CLInterface::selectSerialPort() {
 
 void CLInterface::interfaceLoop(ArduinoInterface* a_interface) {
 	string raw_input;
-	cout << "interface loop ready" << endl;
+
+	cout << "Interface loop ready" << endl;
 
 	cout << "Input END to stop the loop and close the program" << endl;
 

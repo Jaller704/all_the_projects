@@ -97,28 +97,31 @@ bool hume_limit_hit = false;
 void loop() {
   if (!zeroed) {
     //move each motor until their resepctive limit switches are hit
+    //Serial.println("ELBOW LIMIT NOT HIT");
     if(digitalRead(elbow_blimit_pin) == HIGH && !elbow_limit_hit) {
-      Serial.println("ELBOW LIMIT NOT HIT");
+      //Serial.println("ELBOW LIMIT NOT HIT");
       digitalWrite(elbow_direct_pin, LOW);
       digitalWrite(elbow_step_pin, HIGH);
     } else if (digitalRead(elbow_blimit_pin) == LOW){
       elbow_limit_hit = true;
-      Serial.println("ELBOW LIMIT HIT");
+      //Serial.println("ELBOW LIMIT HIT");
     }
-    
+    //Serial.println("HUME LIMIT NOT HIT");
     if(digitalRead(hume_rlimit_pin) == HIGH && !hume_limit_hit && elbow_limit_hit) {
-      Serial.println("HUME LIMIT NOT HIT");
+      //Serial.println("HUME LIMIT NOT HIT");
       digitalWrite(hume_direct_pin,LOW);
       digitalWrite(hume_step_pin, HIGH);
     } else if (digitalRead(hume_rlimit_pin) == LOW){
       hume_limit_hit = true;
-      Serial.println("HUME LIMIT HIT");
+      //Serial.println("HUME LIMIT HIT");
     }
-
+ //Serial.println("NOT ZEROED");
+ //Serial.flush();
     if(hume_limit_hit && elbow_limit_hit) {
       fore_servo.write(0);
       zeroed = true;
       Serial.println("ZEROED");
+      Serial.flush();
     }
     
   } else {
@@ -133,17 +136,17 @@ void loop() {
   
 void runConfig() {
   Serial.println("ROT_FORE");
-  Serial.println("GET_FORE_ROT");
   Serial.println("ROT_HUME");
-  Serial.println("GET_HUME_ROT");
   Serial.println("PIV_ELBW");
-  Serial.println("GET_ELBW_POS");
   Serial.println("PIV_SHLD");
-  Serial.println("GET_SHLD_POS");
-  Serial.println("PIV_WRTH");
-  Serial.println("GET_WRTH_POS");
-  Serial.println("PIV_WRTV");
-  Serial.println("GET_WRTV_POS");
+  Serial.println("PIV_WRTH"); //NOT IMPLEMENTED
+  Serial.println("PIV_WRTV"); //NOT IMPLEMENTED
+  Serial.println("GET_FORE_ROT");
+  Serial.println("GET_HUME_ROT"); //NOT IMPLEMENTED
+  Serial.println("GET_ELBW_POS"); //NOT IMPLEMENTED
+  Serial.println("GET_SHLD_POS"); //NOT IMPLEMENTED
+  Serial.println("GET_WRTH_POS"); //NOT IMPLEMENTED
+  Serial.println("GET_WRTV_POS"); //NOT IMPLEMENTED
   Serial.flush(); 
 }
 
@@ -188,6 +191,9 @@ void getHumerusRotation(){
   // Ran out of pins for encoders so no encoder object created
   /*Serial.println("HUME_ROT" + String(hume_enc.read()));
     Serial.flush(); */
+
+  Serial.println("INVALID FUNCTION");
+  Serial.flush();
 }
 
 void pivotElbow(){
@@ -213,6 +219,9 @@ void getElbowPosition(){
   // Ran out of pins for encoders so no encoder object created
   /*Serial.println("ELBW_PIV" + String(elbow_enc.read()));
     Serial.flush();*/
+
+  Serial.println("INVALID FUNCTION");
+  Serial.flush();
 }
 
 void pivotShoulder(){
@@ -235,22 +244,30 @@ void pivotShoulder(){
 }
 
 void getShoulderPosition(){
-  Serial.println("SHLD_PIV " + String(shoulder_enc.read()));
+  // No encoder to read from
+  /*Serial.println("SHLD_PIV " + String(shoulder_enc.read()));
+  Serial.flush();*/
+  
+  Serial.println("INVALID FUNCTION");
   Serial.flush();
 }
 
 void pivotWristHorz() {
-  
+  Serial.println("INVALID FUNCTION");
+  Serial.flush();
 }
 
 void getWristHorzPosition() {
-  
+  Serial.println("INVALID FUNCTION");
+  Serial.flush();
 }
 
 void pivotWristVert(){
-  
+  Serial.println("INVALID FUNCTION");
+  Serial.flush();
 }
 
 void getWristVertPosition(){
-  
+  Serial.println("INVALID FUNCTION");
+  Serial.flush();
 }
