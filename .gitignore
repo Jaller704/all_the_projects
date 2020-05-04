@@ -3,6 +3,9 @@
 
 # Visual Studio user specific files
 Dissertation/UnrealEngine/DissProject4_24/.vs/
+Dissertation/Interface_code/Arduino_interface/.vs/
+Dissertation/Interface_code/Arduino_interface/Debug/
+Dissertation/Interface_code/Arduino_interface/x64/
 
 # Compiled Object files
 Dissertation/UnrealEngine/DissProject4_24/*.slo
