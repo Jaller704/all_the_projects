@@ -70,6 +70,7 @@ void ArduinoInterface::config() {
 
 bool ArduinoInterface::write(ArduinoCommand& c) {
 	string command = c.getSerialCommand();
+	
 	if (safeCommand(c)) {
 		if (link->WriteData(command.c_str(), command.length())) {
 			return true;
@@ -88,6 +89,7 @@ bool ArduinoInterface::write(ArduinoCommand& c) {
 }
 
 string ArduinoInterface::read() {
+	memset(read_buffer, 0, sizeof(read_buffer));
 	int bytes_read = link->ReadData(read_buffer, 20);
 	string read_string = read_buffer;
 	
