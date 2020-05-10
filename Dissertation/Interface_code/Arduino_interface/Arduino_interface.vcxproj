@@ -23,6 +23,7 @@
     <ProjectGuid>{35DB3DAF-1F92-469F-BC00-08BBEA354D56}</ProjectGuid>
     <RootNamespace>Arduinointerface</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>comms_interface</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
