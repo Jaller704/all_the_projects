@@ -253,6 +253,21 @@ void getShoulderPosition(){
 }
 
 void pivotWristHorz() {
+  /*char *arg = cmd.next();
+  int value = String(arg).toInt();
+  
+  if(value < 0) { // Rotating left
+    if(value < -90) {
+      value = 90;
+    } else {
+      value = abs(value)
+    }
+    lwrist_servo.write(value);
+  }
+
+  Serial.println("FORE_SET " + String(arg));
+  Serial.flush();*/
+
   Serial.println("INVALID FUNCTION");
   Serial.flush();
 }

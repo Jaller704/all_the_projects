@@ -15,6 +15,10 @@ public:
 	*/
 	static unique_ptr<Serial> selectSerialPort();
 
+	/*
+	* Begins an interface loop to continuously take in commands and match 
+	* the loop control on the Arduino
+	*/
 	static void interfaceLoop(ArduinoInterface*);
 
 };

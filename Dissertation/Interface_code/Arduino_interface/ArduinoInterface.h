@@ -43,6 +43,6 @@ private:
 
 	vector<string> valid_commands;
 	unique_ptr<Serial> link;
-	char read_buffer[11];
+	char read_buffer[20];
 };
 
