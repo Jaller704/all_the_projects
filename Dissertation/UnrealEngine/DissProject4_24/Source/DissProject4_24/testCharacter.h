@@ -45,5 +45,10 @@ public:
 
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+	UFUNCTION(BlueprintGetter, Category = "VR")
+		FVector GetLoc();
+private:
+	UPROPERTY()
+		FVector loc;
 
 };

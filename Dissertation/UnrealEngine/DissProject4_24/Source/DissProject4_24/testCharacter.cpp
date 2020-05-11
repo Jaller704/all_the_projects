@@ -33,7 +33,8 @@ void AtestCharacter::BeginPlay()
 {
 	Super::BeginPlay();
 
-	FVector loc = SM_right->GetComponentLocation();
+
+
 	
 	
 }
@@ -43,6 +44,9 @@ void AtestCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+	loc = SM_right->GetComponentLocation();
+
+	
 }
 
 // Called to bind functionality to input
@@ -52,3 +56,6 @@ void AtestCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 
 }
 
+FVector AtestCharacter::GetLoc() {
+	return loc;
+}
